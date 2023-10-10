@@ -1,4 +1,4 @@
-Country,Code,Year,nuclear_weapons_status,nuclear_weapons_tests,nuclear_weapons_stockpile
+Admin,Code,Year,nuclear_weapons_status,nuclear_weapons_tests,nuclear_weapons_stockpile
 Abkhazia,OWID_ABK,1938,0,0,0
 Abkhazia,OWID_ABK,1939,0,0,0
 Abkhazia,OWID_ABK,1940,0,0,0
