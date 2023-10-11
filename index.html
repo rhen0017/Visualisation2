@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<<head>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Data Visualization Dashboard</title>
+</head>
+<body>
+  <div class="title-block">
+    <div class="title">90 Seconds to Midnight</div>
+    <div class="author">
+      <p>Author: Redmond Henry</p>
+      <a class="icon-link" href="https://www.linkedin.com/in/redmond-henry-b439b4257/" target="_blank">
+        <img src="https://raw.githubusercontent.com/rhen0017/Visualisation2/main/linkdin.png" alt="LinkedIn" class="author-icon">
+      </a>
+    </div>
+  </div>
+
+  <div class="black-space">
+    <div class="message">
+      <p class="main-message">“Unprecedented Danger”: Russia-Ukraine War Pushes Iconic Doomsday</p>
+      <p class="main-message">Clock Closest to Midnight Ever in its History.</p>
+      <p class="sub-message">- Bulletin of the Atomic Scientists</p>
+      <p class="sub-message">- January 24, 2023</p>
+    </div>
+    <img src="https://raw.githubusercontent.com/rhen0017/Visualisation2/main/Image%201.jpg" alt="Image 1" class="image-1">
+  </div>
+  
+  <div id="vis"></div>
+  
+  <script type="text/javascript">
+    var yourVlSpec = {
+      $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+      data: {url: 'https://raw.githubusercontent.com/rhen0017/Visualisation2/main/nuclear-warhead-stockpiles.csv'},
+      transform: [
+        {
+          filter: "datum.Entity === 'United States' || datum.Entity === 'Russia' || datum.Entity === 'World'"
+        }
+      ],
+      layer: [
+        {
+          mark: 'area',
+          encoding: {
+            x: {field: 'Year', type: 'temporal', title: 'Year'},
+            y: {
+              field: 'nuclear_weapons_stockpile', type: 'quantitative',
+              stack: null,
+              title: 'Stockpile'
+            },
+            color: {
+              field: 'Entity', type: 'nominal',
+              scale: {
+                domain: ['United States', 'Russia', 'World'],
+                range: ['blue', 'red', 'lightgrey']
+              },
+              //legend: null // Removed to enable legend for area marks
+            },
+            opacity: { value: 0.3 }
+          }
+        },
+        {
+          mark: 'line',
+          encoding: {
+            x: {field: 'Year', type: 'temporal'},
+            y: {field: 'nuclear_weapons_stockpile', type: 'quantitative'},
+            color: {
+              field: 'Entity', type: 'nominal',
+              scale: {
+                domain: ['United States', 'Russia', 'World'],
+                range: ['blue', 'red', 'lightgrey']
+              },
+              legend: { title: 'Country' } // Ensured legend is enabled
+            }
+          }
+        },
+        {
+          mark: 'point',
+          encoding: {
+            x: {field: 'Year', type: 'temporal'},
+            y: {field: 'nuclear_weapons_stockpile', type: 'quantitative'},
+            color: {
+              field: 'Entity', type: 'nominal',
+              scale: {
+                domain: ['United States', 'Russia', 'World'],
+                range: ['blue', 'red', 'lightgrey']
+              },
+              //legend: null // Removed to enable legend for point marks
+            },
+            tooltip: [
+              { field: 'Entity', type: 'nominal', title: 'Country' },
+              { field: 'nuclear_weapons_stockpile', type: 'quantitative', title: 'Stockpile' },
+              { field: 'Year', type: 'temporal' }
+            ]
+          }
+        }
+      ],
+      title: {
+        text: 'Nuclear Stockpile', // Title
+        color: 'white',
+        fontSize: 20
+      },
+      config: {
+        background: 'black',
+        axis: {
+          domainColor: 'white',
+          tickColor: 'white',
+          labelColor: 'white',
+          titleColor: 'white',
+          grid: false
+        },
+        view: {
+          stroke: 'transparent'
+        },
+        legend: {
+          labelColor: 'white',
+          titleColor: 'white'
+        }
+      }
+    };
+  
+    vegaEmbed('#vis', yourVlSpec, {width: 800, height: 400, actions: false}).then(function(result) {
+    }).catch(console.error);
+  </script>
+  
+
+  <img src="https://raw.githubusercontent.com/rhen0017/Visualisation2/main/small-boy-nuclear-test-1962-fb976d-640.jpg" alt="Image 2" class="image-2">
+
+  <div id="map"></div>
+  <script type="text/javascript">
+      var mapSpec = {
+          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+          "data": {
+              "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/ne_110m_admin_0_countries.json",
+              "format": {
+                  "type": "topojson",
+                  "feature": "ne_110m_admin_0_countries"
+              }
+          },
+          "transform": [{
+              "lookup": "properties.ADMIN",
+              "from": {
+                  "data": {
+                      "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/country-position-nuclear-weapons%203.csv"
+                  },
+                  "key": "Admin",
+                  "fields": ["nuclear_weapons_status"]
+              }
+          }],
+          "projection": {
+              "type": "identity",
+              "reflectY": true
+          },
+          "mark": {
+              "type": "geoshape",
+              "stroke": "null" // Removes the border
+          },
+          "encoding": {
+              "color": {
+                  "field": "nuclear_weapons_status",
+                  "type": "ordinal",
+                  "scale": {
+                      "domain": [0, 1, 2, 3],
+                      "range": ["green", "lightyellow", "orange", "red"]
+                  },
+                  "legend": {
+                      "title": "Nuclear Weapons Status",
+                      "labels": [
+                          "Not Pursuing", "Considering", "Pursuing", "Possesses"
+                      ]
+                  }
+              },
+              "tooltip": [
+                  {
+                      "field": "properties.ADMIN",
+                      "type": "nominal",
+                      "title": "Country"
+                  },
+                  {
+                      "field": "nuclear_weapons_status",
+                      "type": "ordinal",
+                      "title": "Status"
+                  }
+              ]
+          },
+          "config": {
+              "background": "black",
+              "view": {
+                  "stroke": "transparent"
+              }
+          }
+      };
+      vegaEmbed('#map', mapSpec, {
+          width: 800,
+          height: 400,
+          actions: false
+      }).then(function (result) {
+          // Log the result for debugging
+          console.log(result);
+      }).catch(console.error);
+  </script>
+</body>
+
+</html>
+

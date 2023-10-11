@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .title-block {
+    background-color: #565151; /* Changed color to gray */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 42px;
+    font-weight: bold; /* Added this line to make the text bold */
+  }
+  .author {
+    display: block;
+    text-align: right;
+  }
+  
+  .author p {
+    margin: 0;
+  }
+  
+  .author-icon {
+    width: 20px; /* Adjusted size */
+    height: auto;
+    display: block; /* Set the display to block to move it below the author name */
+    margin: 5px 0; /* Added some margin for spacing */
+  }
+  
+  
+  .icon-link {
+    display: block;
+  }
+  
+  .black-space {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: #000;
+  }
+  
+  .image-1 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px; /* Adjusted width */
+    height: auto;
+  }
+  
+  .message {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 80%; /* Adjust the width as necessary */
+  }
+
+  #vis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh; /* or another height that you want */
+  }
+  
+  .main-message {
+    font-size: 24px;
+    margin: 0;
+    padding-bottom: 10px; /* Adjust space between main message and sub-message */
+    position: relative;
+  }
+  
+  .sub-message {
+    font-size: 20px; /* Adjust font size */
+    margin: 0;
+    padding-top: 10px; /* Adjust space */
+    text-align: right;
+  }
+  
+  .blank-space {
+    width: 100%;
+    height: 300px; /* Adjust this height as needed for your visualization */
+    background-color: #000;
+  }
+  
+  .image-2 {
+    width: 100%;
+    height: auto;
+  }
+
+  #map {
+    width: 100%;
+    height: 1600px; /* Adjust as needed */
+    margin: auto;
+}
