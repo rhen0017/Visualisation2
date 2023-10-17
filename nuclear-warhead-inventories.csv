@@ -1,10 +1,10 @@
-Entity,Code,,nuclear_weapons_depl_strat,nuclear_weapons_depl_nonstrat,nuclear_weapons_reserve_nondepl,nuclear_weapons_retired
-China,CHN,,0,0,410,0
-France,FRA,,280,0,10,0
-India,IND,,0,0,164,0
-Israel,ISR,,0,0,90,0
-North Korea,PRK,,0,0,30,0
-Pakistan,PAK,,0,0,170,0
-Russia,RUS,,1674,0,2815,1400
-United Kingdom,GBR,,120,0,105,0
-United States,USA,,1670,100,1938,1536
+Country,Deployed Strategic Warheads,Deployed Non-Strategic Warheads,Non-Deployed Reserve Warheads,Retired Warheads
+China,0,0,410,0
+France,280,0,10,0
+India,0,0,164,0
+Israel,0,0,90,0
+North Korea,0,0,30,0
+Pakistan,0,0,170,0
+Russia,1674,0,2815,1400
+United Kingdom,120,0,105,0
+United States,1670,100,1938,1536
