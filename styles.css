@@ -1,102 +1,264 @@
 body {
-    margin: 0;
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: #000;
-    color: #fff;
-  }
-  
-  .title-block {
-    background-color: #565151; /* Changed color to gray */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .title {
-    font-size: 42px;
-    font-weight: bold; /* Added this line to make the text bold */
-  }
-  .author {
-    display: block;
-    text-align: right;
-  }
-  
-  .author p {
-    margin: 0;
-  }
-  
-  .author-icon {
-    width: 20px; /* Adjusted size */
-    height: auto;
-    display: block; /* Set the display to block to move it below the author name */
-    margin: 5px 0; /* Added some margin for spacing */
-  }
-  
-  
-  .icon-link {
-    display: block;
-  }
-  
-  .black-space {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    background-color: #000;
-  }
-  
-  .image-1 {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1000px; /* Adjusted width */
-    height: auto;
-  }
-  
-  .message {
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 80%; /* Adjust the width as necessary */
-  }
+  margin: 0 auto; /* Centers the content horizontally */
+  width: 1400px;
+  font-family: 'Times New Roman', serif;
+  background-color: #000;
+  color: #fff;
+}
+.title-block {
+  background-color: #565151;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
 
-  #vis {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh; /* or another height that you want */
-  }
-  
-  .main-message {
-    font-size: 24px;
-    margin: 0;
-    padding-bottom: 10px; /* Adjust space between main message and sub-message */
-    position: relative;
-  }
-  
-  .sub-message {
-    font-size: 20px; /* Adjust font size */
-    margin: 0;
-    padding-top: 10px; /* Adjust space */
-    text-align: right;
-  }
-  
-  .blank-space {
-    width: 100%;
-    height: 300px; /* Adjust this height as needed for your visualization */
-    background-color: #000;
-  }
-  
-  .image-2 {
-    width: 100%;
-    height: auto;
-  }
+.title {
+  font-size: 42px;
+  font-weight: bold;
+}
 
-  #map {
-    width: 100%;
-    height: 1600px; /* Adjust as needed */
-    margin: auto;
+.author {
+  display: block;
+  text-align: right;
+}
+
+.author p {
+  margin: 0;
+}
+
+.author-icon {
+  width: 20px;
+  height: auto;
+  display: block;
+  margin: 5px 0;
+}
+
+.icon-link {
+  display: block;
+}
+
+.black-space {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-color: #000;
+}
+
+.image-1 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 550px;
+  height: auto;
+}
+
+.message {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 80%;
+}
+
+#vis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  border: 1px solid white; /* Adjust the thickness (2px) and color (white) as needed */
+    box-sizing: border-box; /* This ensures the border is included in the element's total width and height */
+}
+
+.main-message {
+  font-size: 24px;
+  margin: 0;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.sub-message {
+  font-size: 20px;
+  margin: 0;
+  padding-top: 10px;
+  text-align: right;
+}
+
+.blank-space {
+  width: 100%;
+  height: 11px;
+  background-color: #000;
+}
+
+.image-quote-container {
+  position: relative;
+  width: 100%; 
+  max-width: 800px; /* This should match the width of your image */
+  margin: auto; /* Center the container */
+}
+
+.image-2 {
+  display: block; /* Ensure the image takes the full width of its container */
+  width: 100%; 
+  max-width: 10000px; /* This should match the actual width of your image */
+  padding-top: 20px;
+
+}
+
+.quote-overlay {
+  position: absolute;
+  top: 170%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: 'Times New Roman', serif;
+  font-size: 36px;
+  color: black;
+  background: rgba(255, 255, 255, 0.6); /* semi-transparent white background to improve readability */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.quote-author {
+  font-size: 24px;
+}
+
+#map {
+  width: 100%;
+  height: 450px;
+  margin: none;
+  border: 1px solid white;
+}
+
+/* Grid layout for visualization containers */
+.vis-container, .map-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+/* Styles for the text element next to the visualizations */
+.side-text {
+  align-self: center;
+  margin-left: 50px;  /* Adds space to the left of the background */
+  padding: 20px;
+  background: rgba(255, 207, 94, 0.6); /* Semi-transparent white background */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 18px; /* Adjust font size as desired */
+  max-width: 400px; /* Optional: Set a max-width if you'd like */
+}
+
+.bar {
+  background-color: rgba(86, 81, 81, 0.7); /* Using rgba for reduced opacity */
+  text-align: center; /* Centering the text/title */
+  font-size: 24px; /* Size of the title */
+  margin-top: 20px; /* Space between the bar and the previous element, adjust as needed */
+  margin-bottom: 20px; /* Space between the bar and the previous element, adjust as needed */
+}
+#vg-tooltip-element td.key, #vg-tooltip-element td.value {
+  color: black !important;
+}
+
+/* Styles for the slider track and thumb */
+input[type="range"] {
+
+  width: 100%;
+  height: 10px;
+  background: #ddd; /* Gray background for the track */
+  border-radius: 5px;
+  margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+/* Customize the slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #888; /* Gray color for the slider thumb */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Style for the slider value display (year text) */
+#yearDisplay {
+  text-align: center;
+  font-size: 24px; /* Larger font size */
+  color: white; /* White text color */
+  margin: 0 auto; /* Center horizontally */
+  display: block;
+  padding-bottom: 20px; /* This is the new padding added below the slider */
+
+}
+
+/* Styles for the progress bar track */
+input[type="range"]::-webkit-progress-bar {
+  background: #ddd; /* Gray background for the progress bar track */
+  border-radius: 5px;
+}
+
+/* Styles for the progress bar value */
+input[type="range"]::-webkit-progress-value {
+  background: #888; /* Gray color for the progress bar value */
+  border-radius: 5px;
+}
+label[for="yearSlider"] {
+  color: black; /* Black text color */
+}
+#vis2-container {
+  display: flex;
+  justify-content: center;
+}
+
+#vis2 {
+  background-color: #000;
+  border: 1px solid white; /* Adjust the thickness (2px) and color (white) as needed */
+    box-sizing: border-box; /* This ensures the border is included in the element's total width and height */
+}
+
+#inventoryContainer-container {
+  display: flex;
+  justify-content: center;
+}
+
+#inventoryContainer {
+  background-color: #000;
+  border: 0.5px solid white; /* Adjust the thickness (2px) and color (white) as needed */
+    box-sizing: border-box; /* This ensures the border is included in the element's total width and height */
+}
+
+#bubbleContainer-container {
+  display: flex;
+  justify-content: center;
+}
+
+#bubbleContainer {
+  background-color: #000;
+  border: 0.5px solid white; /* Adjust the thickness (2px) and color (white) as needed */
+    box-sizing: border-box; /* This ensures the border is included in the element's total width and height */
+    margin-top:  20px;
+}
+
+.inventory-side-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+
+/* Styles for the closing statement text box */
+.closing-text {
+  margin-top: 50px;  /* Adds space above the box for separation */
+  padding: 20px;
+  background: rgba(255, 207, 94, 0.6); /* Semi-transparent white background */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 18px; /* Adjust font size as desired */
+  max-width: 1400px; /* Optional: Adjust to desired width */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  clear: both;  /* Ensure the box is placed below other floated or inline-block elements */
+  margin-bottom: 20px;
 }

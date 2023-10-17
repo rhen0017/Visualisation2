@@ -1,208 +1,668 @@
-<!DOCTYPE html>
 <html lang="en">
-<<head>
+
+<head>
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Data Visualization Dashboard</title>
 </head>
+
 <body>
-  <div class="title-block">
-    <div class="title">90 Seconds to Midnight</div>
-    <div class="author">
-      <p>Author: Redmond Henry</p>
-      <a class="icon-link" href="https://www.linkedin.com/in/redmond-henry-b439b4257/" target="_blank">
-        <img src="https://raw.githubusercontent.com/rhen0017/Visualisation2/main/linkdin.png" alt="LinkedIn" class="author-icon">
-      </a>
+    <div class="title-block">
+        <div class="title">90 Seconds to Midnight</div>
+        <div class="author">
+            <p>Author: Redmond Henry</p>
+            <a class="icon-link" href="https://www.linkedin.com/in/redmond-henry-b439b4257/" target="_blank">
+                <img src="https://raw.githubusercontent.com/rhen0017/Visualisation2/main/linkdin.png" alt="LinkedIn" class="author-icon">
+            </a>
+        </div>
     </div>
-  </div>
 
-  <div class="black-space">
-    <div class="message">
-      <p class="main-message">“Unprecedented Danger”: Russia-Ukraine War Pushes Iconic Doomsday</p>
-      <p class="main-message">Clock Closest to Midnight Ever in its History.</p>
-      <p class="sub-message">- Bulletin of the Atomic Scientists</p>
-      <p class="sub-message">- January 24, 2023</p>
+    <div class="black-space">
+        <div class="message">
+            <p class="main-message">“Unprecedented Danger”: Russia-Ukraine War Pushes Iconic Doomsday</p>
+            <p class="main-message">Clock Closest to Midnight Ever in its History.</p>
+            <p class="sub-message">- Bulletin of the Atomic Scientists</p>
+            <p class="sub-message">- January 24, 2023</p>
+        </div>
+        <img src="https://github.com/rhen0017/Visualisation2/blob/main/Image%2012.jpg?raw=true" alt="Image 1" class="image-1">
     </div>
-    <img src="https://raw.githubusercontent.com/rhen0017/Visualisation2/main/Image%201.jpg" alt="Image 1" class="image-1">
-  </div>
-  
-  <div id="vis"></div>
-  
-  <script type="text/javascript">
-    var yourVlSpec = {
-      $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-      data: {url: 'https://raw.githubusercontent.com/rhen0017/Visualisation2/main/nuclear-warhead-stockpiles.csv'},
-      transform: [
-        {
-          filter: "datum.Entity === 'United States' || datum.Entity === 'Russia' || datum.Entity === 'World'"
-        }
-      ],
-      layer: [
-        {
-          mark: 'area',
-          encoding: {
-            x: {field: 'Year', type: 'temporal', title: 'Year'},
-            y: {
-              field: 'nuclear_weapons_stockpile', type: 'quantitative',
-              stack: null,
-              title: 'Stockpile'
-            },
-            color: {
-              field: 'Entity', type: 'nominal',
-              scale: {
-                domain: ['United States', 'Russia', 'World'],
-                range: ['blue', 'red', 'lightgrey']
-              },
-              //legend: null // Removed to enable legend for area marks
-            },
-            opacity: { value: 0.3 }
-          }
-        },
-        {
-          mark: 'line',
-          encoding: {
-            x: {field: 'Year', type: 'temporal'},
-            y: {field: 'nuclear_weapons_stockpile', type: 'quantitative'},
-            color: {
-              field: 'Entity', type: 'nominal',
-              scale: {
-                domain: ['United States', 'Russia', 'World'],
-                range: ['blue', 'red', 'lightgrey']
-              },
-              legend: { title: 'Country' } // Ensured legend is enabled
+
+    <div class="bar">Nuclear Stockpile</div>
+
+    <div class="vis-container">
+        <div id="vis"></div>
+        <div class="side-text">
+            <p>In 1986 the height of the cold war saw over 70000 nuclear weapons in the nuclear aresenal of the world. Following this an agreement between U.S. President Ronaldok Reagen and Soviet General Secretary Mikhail Gorbachev signed the INF treaty which saw a reduction in nuclear arms from 1987 onwards.</p>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var yourVlSpec = {
+          $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+          data: {url: 'https://raw.githubusercontent.com/rhen0017/Visualisation2/main/nuclear-warhead-stockpiles.csv'},
+          transform: [
+            {
+              filter: "datum.Entity === 'United States' || datum.Entity === 'Russia' || datum.Entity === 'World'"
             }
-          }
-        },
-        {
-          mark: 'point',
-          encoding: {
-            x: {field: 'Year', type: 'temporal'},
-            y: {field: 'nuclear_weapons_stockpile', type: 'quantitative'},
-            color: {
-              field: 'Entity', type: 'nominal',
-              scale: {
-                domain: ['United States', 'Russia', 'World'],
-                range: ['blue', 'red', 'lightgrey']
-              },
-              //legend: null // Removed to enable legend for point marks
+          ],
+          layer: [
+            {
+              mark: 'area',
+              encoding: {
+                x: {field: 'Year', type: 'temporal', title: 'Year'},
+                y: {
+                  field: 'nuclear_weapons_stockpile', type: 'quantitative',
+                  stack: null,
+                  title: 'Stockpile'
+                },
+                color: {
+            field: 'Entity', type: 'nominal',
+            scale: {
+              domain: ['United States', 'Russia', 'World'],
+              range: ['#8B8FFF', '#FF8B8B', '#CACACA'] 
+                  },
+                },
+                opacity: { value: 0.3 }
+              }
             },
-            tooltip: [
-              { field: 'Entity', type: 'nominal', title: 'Country' },
-              { field: 'nuclear_weapons_stockpile', type: 'quantitative', title: 'Stockpile' },
-              { field: 'Year', type: 'temporal' }
-            ]
-          }
+            {
+              mark: 'line',
+              encoding: {
+                x: {field: 'Year', type: 'temporal'},
+                y: {field: 'nuclear_weapons_stockpile', type: 'quantitative'},
+                color: {
+                  field: 'Entity', type: 'nominal',
+                  scale: {
+                    domain: ['United States', 'Russia', 'World'],
+                    range: ['blue', 'red', 'lightgrey']
+                  },
+                  legend: { title: 'Country' } // Ensured legend is enabled
+                }
+              }
+            },
+            {
+              mark: 'point',
+              encoding: {
+                x: {field: 'Year', type: 'temporal'},
+                y: {field: 'nuclear_weapons_stockpile', type: 'quantitative'},
+                color: {
+                  field: 'Entity', type: 'nominal',
+                  scale: {
+                    domain: ['United States', 'Russia', 'World'],
+                    range: ['blue', 'red', 'lightgrey']
+                  },
+                },
+                tooltip: [
+                  { field: 'Entity', type: 'nominal', title: 'Country' },
+                  { field: 'nuclear_weapons_stockpile', type: 'quantitative', title: 'Stockpile' },
+                  { field: 'Year', type: 'temporal' }
+                ]
+              }
+            }
+          ],
+          config: {
+    background: 'black',
+    font: 'Times New Roman', // Specify the desired font type here
+    axis: {
+        domainColor: 'white',
+        tickColor: 'white',
+        labelColor: 'white',
+        titleColor: 'white',
+        grid: false,
+        titleFontSize: 16, // Specify the desired font size here
+        labelFontSize: 12, // Specify the desired font size here
+
+
+    },
+    view: {
+        stroke: 'transparent'
+    },
+    legend: {
+        labelColor: 'white',
+        titleColor: 'white',
+        titleFontSize: 16, // Specify the desired font size here
+        labelFontSize: 12// Specify the desired font size here
+    },
+    tooltip: {
+        color: 'black'
+    }
+}
         }
-      ],
-      title: {
-        text: 'Nuclear Stockpile', // Title
-        color: 'white',
-        fontSize: 20
+        vegaEmbed('#vis', yourVlSpec, {width: 800, height: 400, actions: false}).then(function(result) {
+        }).catch(console.error);
+      </script>
+
+    <img src="https://raw.githubusercontent.com/rhen0017/Visualisation2/main/small-boy-nuclear-test-1962-fb976d-640.jpg" alt="Image 2" class="image-2">
+    <div class="quote-overlay">
+      <p>"I have become death, destroyer of worlds."</p>
+      <p class="quote-author">- J. Robert Oppenheimer, 1945</p>
+  </div>
+
+  <div class="bar">Nuclear Proliferation</div>
+
+  <div class="map-container">
+    <div id="map"></div>
+    <div class="side-text" id="decadeText">
+        <p id="decadeMessage">Default message (this will be replaced on slider input).</p>
+    </div>
+</div>
+
+<label for="yearSlider">Year: </label>
+<input type="range" min="1938" max="2022" value="1938" id="yearSlider">
+<span id="yearDisplay">1938</span>
+
+<script type="text/javascript">
+  const decadeMessages = {
+    '1930s': `
+        - In the 1930s, the world witnessed a pivotal moment in scientific history when, in 1938, chemists working in a laboratory in Berlin achieved a groundbreaking feat: they successfully split the uranium atom. This discovery laid the foundation for the development of atomic energy and, subsequently, the atomic bomb.
+
+        - The ramifications of this breakthrough were felt globally, as both the United States and Germany contemplated the immense potential and destructive power of an atomic bomb. The scientific achievements of this decade would have far-reaching consequences for the course of history.
+    `,
+    '1940s': `
+        - The 1940s were marked by the intensification of World War II, a global conflict of unprecedented scale and devastation. As the war raged on, the United States embarked on a top-secret project to develop and harness the power of atomic energy for military purposes.
+
+        - In 1945, the United States successfully developed and dropped two atomic bombs on the Japanese cities of Hiroshima and Nagasaki. These catastrophic events hastened the conclusion of World War II and ushered in the atomic age, forever altering the world's geopolitical landscape.
+    `,
+    '1950s': `
+        - The 1950s opened with a seismic event in the world of nuclear weapons when, in 1949, the Soviet Union detonated its first atomic bomb, codenamed "First Lightning." This achievement marked the beginning of the Cold War, a period characterized by intense ideological rivalry and military competition between the United States and the Soviet Union.
+
+        - The 1950s were marked by heightened tensions between these superpowers, with proxy wars like the Korean War serving as ominous reminders of the global stakes involved in the Cold War conflict.
+    `,
+    '1960s': `
+        - The 1960s were a decade of remarkable human achievement and unparalleled nuclear peril. It was a time when nations raced to explore space, culminating in the historic moon landing.
+
+        - However, this era also witnessed the closest point in history to nuclear annihilation during the Cuban Missile Crisis. The world held its breath as the United States and the Soviet Union engaged in a high-stakes standoff over the presence of nuclear missiles in Cuba.
+        
+        - Simultaneously, the Vietnam War emerged as a tragic proxy conflict between the superpowers, further emphasizing the tensions and conflicts of the era.
+    `,
+    '1970s': `
+        - The 1970s brought a measure of relief as Cold War tensions eased. This period saw the Strategic Arms Limitation Talks (SALT I and SALT II) of 1972 and 1979, during which the United States and the Soviet Union agreed to limit their antiballistic missiles and strategic missiles capable of carrying nuclear weapons.
+
+        - These agreements marked significant steps toward reducing the risk of a nuclear confrontation and provided hope for a more stable world order.
+    `,
+    '1980s': `
+        - The 1980s, despite witnessing a peak with over 70,000 nuclear weapons globally, were also marked by significant geopolitical events. The early 1980s were characterized by the Soviet-Afghan War, with the United States and other anti-Soviet nations supporting the Mujahideen resistance.
+        
+        - This period was defined by the intense rivalry between the superpowers, with nuclear weapons serving as a backdrop to global conflicts and tensions.
+    `,
+    '1990s': `
+        - The 1990s saw the symbolic fall of the Berlin Wall in 1989 and the subsequent dissolution of the Soviet Union in 1991. These historic events marked the end of the Cold War, bringing about a profound transformation in the geopolitical landscape.
+        
+        - The world entered a new era characterized by the emergence of new nations and the pursuit of global cooperation in a post-Cold War world.
+    `,
+    '2000s': `
+        - The 2000s and 2010s were marked by ongoing uprisings and proxy wars in the Middle East, reshaping the dynamics of global conflict. However, despite regional tensions, the overall risk of nuclear annihilation reached its lowest point in history, with both superpowers exercising restraint in their nuclear arsenals.
+    `,
+    '2010s': `
+        - The 2010s continued to witness unrest and proxy conflicts dominating the Middle East. Nevertheless, the global nuclear threat remained relatively low, with a focus on diplomatic solutions and arms control agreements.
+    `,
+    '2020s': `
+        - The 2020s opened with heightened tensions as Russia's invasion of Ukraine raised concerns worldwide. The geopolitical landscape became uncertain, and the world watched anxiously as new challenges emerged on the global stage.
+    `,
+};
+    
+    function updateDecadeMessage(year) {
+        const decade = Math.floor(year / 10) * 10 + 's';
+        const message = decadeMessages[decade];
+        document.getElementById('decadeMessage').innerText = message ? message : 'No specific message for this decade.';
+    }
+
+  var mapSpec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": {
+          "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/ne_110m_admin_0_countries.json",
+          "format": {
+              "type": "topojson",
+              "feature": "ne_110m_admin_0_countries"
+          }
       },
-      config: {
-        background: 'black',
-        axis: {
-          domainColor: 'white',
-          tickColor: 'white',
-          labelColor: 'white',
-          titleColor: 'white',
-          grid: false
-        },
-        view: {
-          stroke: 'transparent'
-        },
-        legend: {
-          labelColor: 'white',
-          titleColor: 'white'
-        }
-      }
-    };
-  
-    vegaEmbed('#vis', yourVlSpec, {width: 800, height: 400, actions: false}).then(function(result) {
-    }).catch(console.error);
-  </script>
-  
-
-  <img src="https://raw.githubusercontent.com/rhen0017/Visualisation2/main/small-boy-nuclear-test-1962-fb976d-640.jpg" alt="Image 2" class="image-2">
-
-  <div id="map"></div>
-  <script type="text/javascript">
-      var mapSpec = {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "data": {
-              "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/ne_110m_admin_0_countries.json",
-              "format": {
-                  "type": "topojson",
-                  "feature": "ne_110m_admin_0_countries"
-              }
-          },
-          "transform": [{
-              "lookup": "properties.ADMIN",
-              "from": {
-                  "data": {
-                      "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/country-position-nuclear-weapons%203.csv"
-                  },
-                  "key": "Admin",
-                  "fields": ["nuclear_weapons_status"]
-              }
-          }],
-          "projection": {
-              "type": "identity",
-              "reflectY": true
-          },
-          "mark": {
-              "type": "geoshape",
-              "stroke": "null" // Removes the border
-          },
-          "encoding": {
-              "color": {
-                  "field": "nuclear_weapons_status",
-                  "type": "ordinal",
-                  "scale": {
-                      "domain": [0, 1, 2, 3],
-                      "range": ["green", "lightyellow", "orange", "red"]
-                  },
-                  "legend": {
-                      "title": "Nuclear Weapons Status",
-                      "labels": [
-                          "Not Pursuing", "Considering", "Pursuing", "Possesses"
-                      ]
-                  }
+      "transform": [{
+          "lookup": "properties.ADMIN",
+          "from": {
+              "data": {
+                  "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/pivotedData.csv"
               },
-              "tooltip": [
-                  {
-                      "field": "properties.ADMIN",
-                      "type": "nominal",
-                      "title": "Country"
-                  },
-                  {
-                      "field": "nuclear_weapons_status",
-                      "type": "ordinal",
-                      "title": "Status"
-                  }
-              ]
-          },
-          "config": {
-              "background": "black",
-              "view": {
-                  "stroke": "transparent"
-              }
+              "key": "Admin",
+              "fields": ["1938"]
           }
-      };
+      }, {
+          "calculate": "datum['1938'] == '0' ? 'Not Pursuing' : datum['1938'] == '1' ? 'Considering' : datum['1938'] == '2' ? 'Pursuing' : 'Possesses'",
+          "as": "nuclear_weapons_status_text"
+      }],
+      "projection": {
+          "type": "identity",
+          "reflectY": true,
+          "scale": 2,
+          "translate": [400, 220]
+      },
+      "mark": {
+          "type": "geoshape"
+      },
+      "encoding": {
+          "color": {
+              "field": "nuclear_weapons_status_text",
+              "type": "ordinal",
+              "scale": {
+                  "domain": ["Not Pursuing", "Considering", "Pursuing", "Possesses"],
+                  "range": ["#a8d5ba", "#f5e6a2", "#f5c17a","#e59891"]
+              },
+              "legend": {
+                  "title": "Nuclear Weapons Status",
+                  "titleColor": "white",
+                  "labelColor": "white"
+              }
+          },
+          "tooltip": [{
+              "field": "properties.ADMIN",
+              "type": "nominal",
+              "title": "Country"
+          }, {
+              "field": "nuclear_weapons_status_text",
+              "type": "nominal",
+              "title": "Status"
+          }]
+      },
+      "config": {
+          "background": "black",
+          "axis": {
+        "domainColor": "#fff",
+        "labelColor": "#fff",
+        "tickColor": "#fff",
+        "labelFont": "Times New Roman",  // Set font for axis labels
+        "titleFont": "Times New Roman"  // Set font for axis title
+    },
+    "legend": {
+        "labelColor": "#fff",
+        "titleColor": "#fff",
+        "labelFont": "Times New Roman",  // Set font for legend labels
+        "titleFont": "Times New Roman",  // Set font for legend title
+                "labelFontSize": 14,  // Font size for legend labels
+    "titleFontSize": 16   // Font size for legend title
+    },
+          "view": {
+              "stroke": "transparent",
+              "continuousHeight": 400, // Fixed height to prevent jitter
+              "continuousWidth": 800  // Fixed width to prevent jitter
+          }
+      }
+  };
+
+  document.getElementById('yearSlider').addEventListener('input', function() {
+      let selectedYear = this.value;
+      document.getElementById('yearDisplay').textContent = selectedYear;
+      updateDecadeMessage(parseInt(selectedYear));
+
+
+      let lookupTransform = mapSpec.transform.find(transform => transform.hasOwnProperty('lookup'));
+      if (lookupTransform && lookupTransform.from) {
+          lookupTransform.from.fields = [selectedYear];
+      }
+
+      let calculateTransform = mapSpec.transform.find(transform => transform.hasOwnProperty('calculate'));
+      if (calculateTransform) {
+          calculateTransform.calculate = `datum['${selectedYear}'] == '0' ? 'Not Pursuing' : datum['${selectedYear}'] == '1' ? 'Considering' : datum['${selectedYear}'] == '2' ? 'Pursuing' : 'Possesses'`;
+      }
+
+      // Re-render the Vega-Lite view
       vegaEmbed('#map', mapSpec, {
-          width: 800,
+          width: 600,
           height: 400,
           actions: false
-      }).then(function (result) {
-          // Log the result for debugging
-          console.log(result);
-      }).catch(console.error);
+      });
+  });
+
+  // Initial rendering of Vega-Lite view for the year 1938
+  vegaEmbed('#map', mapSpec, {
+            width: 750,
+            height: 400,
+            actions: false
+  }).then(function(result) {
+      console.log(result);
+      updateDecadeMessage(1938);
+  }).catch(console.error);
+</script>
+
+<div id="vis2"></div>
+
+<script>
+  var barChartSpec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": {
+          "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/pivotedData.csv"
+      },
+      "width": 1400,  // This sets the width of the visualization
+    "height": 400,  // This sets the height
+      "config": {
+          "background": "#000",
+          "axis": {
+              "domainColor": "#fff",
+              "labelColor": "#fff",
+              "tickColor": "#fff",
+              "titleColor": "#fff",  // Explicitly setting title color
+              "labelFont": "Times New Roman",  // Set font for axis labels
+              "titleFont": "Times New Roman" , // Set font for axis title
+              "titleFontSize": 16,   // Setting title font size
+
+          },
+          "legend": {
+              "labelColor": "#fff",
+              "titleColor": "#fff",
+              "labelFont": "Times New Roman",  // Set font for axis labels
+        "titleFont": "Times New Roman",  // Set font for axis title
+        "labelFontSize": 14,  // Font size for legend labels
+    "titleFontSize": 16   // Font size for legend title
+          },
+          "view": {
+              "stroke": "transparent"
+          },
+      },
+      "transform": [
+          // Fold over all columns, which will be the years in this case.
+          {"fold": ["1938","1939","1940","1941","1942","1943","1944","1945","1946","1947","1948","1949","1950","1951","1952","1953","1954","1955","1956","1957","1958","1959","1960","1961","1962","1963","1964","1965","1966","1967","1968","1969","1970","1971","1972","1973","1974","1975","1976","1977","1978","1979","1980","1981","1982","1983","1984","1985","1986","1987","1988","1989","1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"]},
+          {"filter": "datum.value !== '0'"}, // Filter out the "Not Pursuing" category
+          {"calculate": "datum.value == '1' ? 'Considering' : datum.value == '2' ? 'Pursuing' : 'Possesses'", "as": "nuclear_weapons_status_text"},
+          {"aggregate": [{"op": "count", "as": "num_countries"}], "groupby": ["key", "nuclear_weapons_status_text"]}
+          
+      ],
+      "mark": "bar",
+      "encoding": {
+        "x": {
+    "field": "key",
+    "type": "ordinal",
+    "title": "Year",
+    "axis": {"labelAngle": -90},
+    "scale": {"band": 0}  // Adjust this value to make bars closer or farther apart.
+},
+          "y": {
+              "field": "num_countries",
+              "type": "quantitative",
+              "title": "Number of Countries"
+          },
+          "tooltip": [
+    {"field": "nuclear_weapons_status_text", "type": "ordinal", "title": "Status"},
+    {"field": "num_countries", "type": "quantitative", "title": "Count", "format": ".0f"}
+],
+          "color": {
+              "field": "nuclear_weapons_status_text",
+    "type": "ordinal",
+    "scale": {
+      "domain": ["Possesses", "Pursuing", "Considering"],  // Set the order of the stack
+      "range": ["#e59891", "#f5c17a", "#f5e6a2"]
+              },
+              "legend": {
+                  "title": "Nuclear Weapons Status"
+              }
+          }
+      }
+  };
+  document.getElementById('yearSlider').addEventListener('input', function() {
+    let selectedYear = this.value;
+    document.getElementById('yearDisplay').textContent = selectedYear;
+
+    // Update map visualization
+    let lookupTransform = mapSpec.transform.find(transform => transform.hasOwnProperty('lookup'));
+    if (lookupTransform && lookupTransform.from) {
+        lookupTransform.from.fields = [selectedYear];
+    }
+
+    let calculateTransform = mapSpec.transform.find(transform => transform.hasOwnProperty('calculate'));
+    if (calculateTransform) {
+        calculateTransform.calculate = `datum['${selectedYear}'] == '0' ? 'Not Pursuing' : datum['${selectedYear}'] == '1' ? 'Considering' : datum['${selectedYear}'] == '2' ? 'Pursuing' : 'Possesses'`;
+    }
+
+    vegaEmbed('#map', mapSpec, {
+        width: 800,
+        height: 400,
+        actions: false
+    });
+
+    // Update bar chart visualization
+    barChartSpec.transform[1] = {
+        "filter": `datum.key >= '${selectedYear}' && datum.key <= '2022' && datum.value !== '0'`
+    };
+
+    vegaEmbed('#vis2', barChartSpec, {
+        width: 1050,
+        height: 400,
+        actions: false
+    });
+});
+
+  
+  vegaEmbed('#vis2', barChartSpec, {width: 1200, height: 400, actions: false}).then(function(result) {});  
   </script>
+  
+
+<div class="bar">Nuclear Inventory</div>
+
+<div class="inventory-side-container">
+  <div id="inventoryContainer"></div>
+  <div class="side-text">
+    "Moreover, the enemy has begun to employ a new and most cruel bomb, the power of which to do damage is, indeed, incalculable, taking the toll of many innocent lives. Should we continue to fight, not only would it result in an ultimate collapse and obliteration of the Japanese nation, but also it would lead to the total extinction of human civilization." 
+    <br>
+    <br>
+    Emporer of Japan Hirohito - August 15, 1945
+  </div>
+</div>
+
+
+<script>
+  let inventorySpec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": {
+          "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/nuclear-warhead-inventories.csv"
+      },
+      "mark": "bar",
+      "encoding": {
+          "y": {
+              "field": "Country",
+              "type": "nominal",
+              "axis": {
+                  "labelColor": "#ffffff",
+                  "titleColor": "#ffffff",
+                  "labelFont": "Times New Roman",
+                  "titleFont": "Times New Roman",
+                  "labelFontSize": 14,
+                  "titleFontSize": 16
+              }
+          },
+          "x": {
+              "field": "value",
+              "type": "quantitative",
+              "stack": true,
+              "title": 'Count',
+              "axis": {
+                  "labelColor": "#ffffff",
+                  "titleColor": "#ffffff",
+                  "labelFont": "Times New Roman",
+                  "titleFont": "Times New Roman",
+                  "labelFontSize": 14,
+                  "titleFontSize": 16
+              }
+          },
+          "color": {
+              "field": "category",
+              "type": "nominal",
+              "legend": {
+                  "title": "Weapon Type",
+                  "labelColor": "#ffffff",
+                  "titleColor": "#ffffff",
+                  "labelFont": "Times New Roman",
+                  "titleFont": "Times New Roman",
+                  "labelFontSize": 14,
+                  "titleFontSize": 16
+                },
+      "scale": {
+        "range": ["#ff9f4f", "#e84a4a", "#5cb05c","#4a8bbf"]  // Custom colors for the categories
+              }
+          },
+          "tooltip": [
+              {"field": "Country", "type": "nominal", "title": "Country"},
+              {"field": "category", "type": "nominal", "title": "Weapon Category"},
+              {"field": "value", "type": "quantitative", "title": "Count", "format": ".0f"}
+          ]
+      },
+      "transform": [
+          {
+              "fold": ["Deployed Strategic Warheads", "Deployed Non-Strategic Warheads", "Non-Deployed Reserve Warheads", "Retired Warheads"],
+              "as": ["category", "value"]
+          },
+          {
+              "filter": "datum.value > 0"
+          }
+      ],
+      "config": {
+          "background": "#000",
+          "view": {
+              "stroke": "transparent"
+          },
+          "axis": {
+              "domainColor": "#ffffff",
+              "labelColor": "#ffffff",
+              "titleColor": "#ffffff"
+          },
+          "legend": {
+              "labelColor": "#ffffff",
+              "titleColor": "#ffffff",
+              "labelLimit": 300  // Increase this value to ensure the entire text is visible
+          }
+      }
+  };
+
+  vegaEmbed('#inventoryContainer', inventorySpec, {
+      width: 500,
+      height: 400,
+      actions: false
+  }).catch(console.error);
+</script>
+
+<div class="inventory-side-container">
+
+<div id="bubbleContainer"></div>
+<div class="side-text">
+  Tsar Bomba, often referred to as the 'King of all Bombs,' was a nuclear device developed by the USSR. Its test remains the largest in history, with an explosive yield of 50 megatons. This detonation stands as the single most potent explosion ever created by humanity. The resulting mushroom cloud reached heights seven times that of Mount Everest, and its shockwave was recorded circling the Earth three times. Frighteningly, windowpanes were reported cracked as far as 900 kilometers from the epicenter. 
+<br>
+<br>
+Humankinds Capacity for destruction is now larger then it has ever been before. 
+
+</div>
+
+<script>
+  let bubbleSpec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": {
+          "url": "https://raw.githubusercontent.com/rhen0017/Visualisation2/main/Nuclear_tests.csv"
+      },
+      "mark": "circle",
+      "encoding": {
+        "y": {
+    "field": "Radius (m)",
+    "type": "quantitative",
+    "title": "Blast Radius (m)",
+    "axis": {
+        "labelColor": "#ffffff",
+        "titleColor": "#ffffff",
+        "labelFont": "Times New Roman",
+        "titleFont": "Times New Roman",
+        "labelFontSize": 14,
+        "titleFontSize": 16
+    }
+},
+          "x": {
+              "field": "Inventory",
+              "type": "quantitative",
+              "title": "Inventory",
+              "axis": {
+                  "labelColor": "#ffffff",
+                  "titleColor": "#ffffff",
+                  "labelFont": "Times New Roman",
+                  "titleFont": "Times New Roman",
+                  "labelFontSize": 14,
+                  "titleFontSize": 16
+              }
+          },
+          "size": {
+    "field": "Yield (Mt)",
+    "type": "quantitative",
+    "title": "Largest Test Yield (Mt)",
+    "scale": {
+        "range": [10, 3000]
+    },
+    "legend": {
+        "gradientStrokeColor": "#ffffff",
+        "gradientThickness": 20,
+        "labelColor": "#ffffff",
+        "titleColor": "#ffffff",
+        "titleFont": "Times New Roman",
+        "labelFont": "Times New Roman",
+        "labelFontSize": 14,
+        "titleFontSize": 16,
+        "symbolFillColor": "#ffffff" 
+
+    }
+},
+
+          "color": {
+              "field": "Country",
+              "type": "nominal",
+              "legend": {
+                  "title": "Country",
+                  "labelColor": "#ffffff",
+                  "titleColor": "#ffffff",
+                  "labelFont": "Times New Roman",
+                  "titleFont": "Times New Roman",
+                  "labelFontSize": 14,
+                  "titleFontSize": 16
+              }
+          },
+          "tooltip": [
+              {"field": "Country", "type": "nominal", "title": "Country"},
+              {"field": "Yield (Mt)", "type": "quantitative", "title": "Largest Test Yield (Mt)"},
+              {"field": "Radius (m)", "type": "quantitative", "title": "Blast Radius (m)"},
+              {"field": "Inventory", "type": "quantitative", "title": "Inventory"}
+          ]
+      },
+      "config": {
+          "background": "#000",
+          "view": {
+              "stroke": "transparent"
+          },
+          "axis": {
+              "domainColor": "#ffffff",
+              "labelColor": "#ffffff",
+              "titleColor": "#ffffff"
+          }
+      }
+  };
+
+  vegaEmbed('#bubbleContainer', bubbleSpec, {
+      width: 616,
+      height: 400,
+      actions: false
+  }).catch(console.error);
+</script>
+
+</div>
+
+<div class="closing-text">
+  As we navigate the mounting turmoil of 2023, the specter of nuclear annihilation looms ever larger on the horizon. A wave of concerns, especially with rogue governments like North Korea expanding their nuclear arsenals, has gripped the global community. The international landscape is further exacerbated by nations that prioritize strategic powerplays over global security, bringing our world perilously close to a point of no return.
+<br>
+<br>
+  Recent uprisings in the Middle East, coupled with the shocking invasion of Ukraine, have stoked the flames of global tension. These events not only spotlight the fragility of peace but also underscore the potential for regional conflicts to spiral into larger, uncontrollable conflagrations.
+  <br>
+<br>
+  The Doomsday Clock, a symbolic gauge of our planet's closeness to a global catastrophe, has recently been adjusted to a harrowing 90 seconds to midnight. Midnight, in this context, signifies a global apocalyptic disaster. This grim positioning brings with it a heightened sense of urgency, compounded by widespread concerns over the actions of unpredictable states and non-state actors alike.
+  <br>
+<br>
+  Now, more than ever, the international community must rally to champion diplomatic solutions, disarmament, and collective action. The threats we face are too great, the stakes too high, for complacency. We bear a collective responsibility to ensure that the horrors of nuclear warfare remain forever in the pages of history, never to be revisited.
+</div>
+
 </body>
 
 </html>
-
